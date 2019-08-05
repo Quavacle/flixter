@@ -1,0 +1,58 @@
+@import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Fira+Code&display=swap');
+
+h1, h2, h3, h4, h5, h6, .navbar {
+  margin: 0;
+}
+body {
+  background-image: image_url('bg.png');
+  padding-top: 53px;
+}
+.navbar {
+  font-weight: 200;
+  box-shadow: 0px 1px 3px #2a2a2a;
+  background-image: image_url('dark-honeycomb.png');
+}
+
+.navbar-dark .navbar-brand {
+  font-family: 'Fira Code', monospace;
+  color: 49, 122, 69;
+}
+
+.hero {
+  background: image_url('hero.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 370px;
+  box-shadow: 0px 3px 8px #2a2a2a;
+}
+
+.hero-overlay {
+  font-family: 'Fire Code', monospace;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+    float: none;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.hero-overlay h1 {
+ text-shadow: rgba(0, 0, 0, 0.95) 1px 1px;
+}
+
+.hero-overlay h2 {
+   text-shadow: rgba(0, 0, 0, 0.95) 1px 1px;
+}
+
+.feature {
+  /*background: image_url('dark-honeycomb.png');*/
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+
+
