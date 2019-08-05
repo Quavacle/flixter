@@ -15,5 +15,13 @@
 //= require turbolinks
 //= require popper
 //= require tether
+//= require bootstrap
 //= require bootstrap-sprockets
 //= require_tree .
+
+Template.navBarTemplate.events({
+    'click .dropdown-toggle': function (e) {
+        e.preventDefault();
+        $(e.target).find('.dropdown-menu').toggle();
+        }
+});
