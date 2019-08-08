@@ -67,5 +67,34 @@ body {
   padding-right: 5%;
 }
 
+html {
+  height: 100%;
+}
 
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+#flex-content-container {
+  flex: 1;
+}
+
+#footer {
+  position: relative;
+  width: 100%;
+  min-height: 50px;
+  max-height: 100px;
+  background: image_url('dark-honeycomb.png');
+  box-shadow: 3px 0px 1px #2a2a2a;
+  font-family: 'Fira Code', monospace;
+  color: white;
+}
+
+#footer a {
+  font-family: 'Fira Code', monospace;
+  color: white;
+}
 
