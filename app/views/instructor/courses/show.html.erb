@@ -1,4 +1,20 @@
 <br />
 <div class="booyah-box col-10 offset-1">
-  <h1 class="text-center"><%= @course.title %>
+  <h1 class="text-center"><%= @course.title %></h1>
+    <br />
+    <%= link_to 'Preview course', course_path(@course), class: 'btn btn-warning float-right' %>
+    <br class="clr" />
+    <div class="text-center">
+      <%= link_to 'Add a section...', new_instructor_course_section_path(@course), class: 'btn btn-primary btn-large' %>
+    </div>
+    <br class="clr" />
+  </div>
+  <div class="booyah-box col-10 offset-1">
+    <ul>
+      <% @course.sections.each do |section| %>
+      <li class="text-center">
+        <%= section.title %>
+      </li>
+      <% end %>
+    </ul>
   </div>
