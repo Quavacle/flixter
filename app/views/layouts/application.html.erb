@@ -129,8 +129,15 @@
 <div class="footer" id="footer">
   <div class="row">
     <div class="container col-6">
+      <% if current_user.nil? %>
+      <%= link_to "Sign up", new_user_registration_path %> or
+      <%= link_to "Log-in", new_user_session_path %> 
+      to teach a course
+      or edit existing courses
+      <% else %>
       <%= link_to 'Teach a Course', new_instructor_course_path %><br />
-      <%= link_to 'Your Courses', instructor_course_path(current_user) %>
+      <%= link_to 'Your Courses', instructor_courses_path %>
+      <% end %>
     </div>
     <div class="container col-6 pull-right">
       <%= link_to 'Linko', '#' %>

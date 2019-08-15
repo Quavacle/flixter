@@ -18,7 +18,11 @@ class Instructor::CoursesController < ApplicationController
   def show
     @course = current_user.courses
   end
-
+ 
+  def index
+    @course = current_user.courses
+  end
+  
   private
 
   def require_authorized_for_current_course
