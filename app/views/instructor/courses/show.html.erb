@@ -17,7 +17,7 @@
   </div>
   <div class="booyah-box col-10 offset-1">
     <ul>
-      <% current_course.sections.each do |section| unless current_course.sections.nil? %>
+      <% current_course.sections.each do |section|%>
       <li class="text-center">
         <%= section.title %>
         <%= link_to 'New Lesson', new_instructor_section_lesson_path(section), class: 'float-right btn btn-primary' %>
