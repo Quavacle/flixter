@@ -11,6 +11,10 @@ class Instructor::LessonsController < ApplicationController
     redirect_to instructor_course_path(current_section.course)
   end
 
+  def show
+    @lesson = current_section.lessons(all)
+  end
+
 
   private
 
@@ -26,6 +30,6 @@ class Instructor::LessonsController < ApplicationController
   end
   
   def lesson_params
-    params.require(:lesson).permit(:title, :subtitle)
+    params.require(:lesson).permit(:title, :subtitle, :video)
   end
 end

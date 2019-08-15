@@ -17,7 +17,7 @@
   </div>
   <div class="booyah-box col-10 offset-1">
     <ul>
-      <% if not current_course.sections.exists? %>
+
       <% current_course.sections.each do |section|%>
       <li class="text-center">
         <%= section.title %>
@@ -26,7 +26,7 @@
           <br />
           <% section.lessons.each do |lesson| %>
           <li>
-            <b><%= lesson.title %></b>
+            <b><%= link_to lesson.title, lesson_path(lesson) %></b>
             -
             <%= lesson.subtitle %>
           </li>
@@ -35,6 +35,6 @@
       </li>
       <br />
       <% end %>
-      <% end %>
+
     </ul>
   </div>

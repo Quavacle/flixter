@@ -3,4 +3,14 @@
 <h1><%= current_lesson.title %></h1>
 <br />
 <h2><%= current_lesson.subtitle %></h2>
+  <video id="my-video" class="video-js vjs-big-play-centered vjs-fluid" controls preload="auto" width="auto" height="auto"
+  poster="default.png" data-setup="{}">
+    <source src="<%= current_lesson.video.to_s %>" type='video/mp4'>
+      <noscript>
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a web browser that
+      <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+  </noscript>
+  </video>
 </div>
