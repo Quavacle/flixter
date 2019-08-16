@@ -109,3 +109,30 @@ body {
 .clr {
   clear: both;
 }
+
+.lesson {
+  background-color: black;
+  border-raidus: 50%;
+  margin-top: 10px;
+  height: 130px
+}
+
+.section {
+  border: 1px solid;
+  border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
+  padding: 20px;
+}
+
+.coursephoto {
+  height: 500px;
+  width: 500px;
+}
+
+.sectionhead {
+  font-family: 'Fire Code', monospace;
+}
+.lesson a {
+  color: white;
+  font-family: "Helvetica Neue", Helvetica;
+  font-weight: 100;
+}

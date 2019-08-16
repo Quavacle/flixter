@@ -3,5 +3,6 @@
 <div class="booyah-box col-10 offest-1">
   <% @course.each do |course| %>
   <%= link_to course.title, course_path(course) %>
+  <%= link_to 'Administer', instructor_course_path(course), class: "btn btn-danger btn-large" %>
   <% end %>
 </div>
