@@ -37,7 +37,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'figaro'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-
+gem 'stripe'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem "fog-aws"

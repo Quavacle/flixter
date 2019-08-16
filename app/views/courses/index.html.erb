@@ -8,6 +8,7 @@
     </h2>
     <% if course.image.url %>
     <%= image_tag course.image.url %>
+    <span class="badge badge-success"><%= number_to_currency course.cost %></span>
     <% end %>
   <br >
   <div class="row">
