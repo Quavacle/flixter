@@ -1,24 +1,36 @@
 <br />
-<div class="booyah-box col-10 offset-1">
-  <h1> Courses Available </h1>
 
-<% @courses.each do |course| %>
-  <h2 class="text-center">
-    <%= link_to course.title, course_path(course) %>   
-    </h2>
-    <% if course.image.url %>
-    <%= image_tag course.image.url %>
-    <span class="badge badge-success"><%= number_to_currency course.cost %></span>
-    <% end %>
-  <br >
+  <h1 class="text-center"> Courses Available </h1>
+  <br />
+  <br />
+  <% @courses.each do |course| %>
+  <div class="booyah-box col-10 offset-1">
   <div class="row">
-    <div class="col-sm-8 col-12">
-      <%= course.description %>
+    <div class="text-center col-sm-12"> <h3><%= link_to course.title, course_path(course) %></h3></div>
+    <div class="inset col-6">
+    Cost: <p class="badge badge-success"><%= number_to_currency course.cost %></p>
+      
+      Instructor <%= course.user.email %>
+       <div class="col-sm-col-12 text-center">
+        <%= link_to 'Learn More', course_path(course), class: 'btn btn-primary btn-med' %>
+      </div>
+    </div>   
+
+    <% if course.image.url %>
+      <%= image_tag course.image.url, class: 'coursephoto float-right' %>
+    </div>  
     </div>
-    <div class="col-sm-col-12 text-center">
-      <%= link_to 'Learn More', course_path(course), class: 'btn btn-primary btn-large' %>
-    </div>
+    <%= course.description %>
   </div>
-  <br class="clr">
-  <% end %>
-</div>
+    <% end %>
+
+    <br >
+    <div class="row">
+      <div class="col-sm-8 col-12">
+        
+      </div>
+      
+    </div>
+    <br class="clr">
+    <% end %>
+  </div>
