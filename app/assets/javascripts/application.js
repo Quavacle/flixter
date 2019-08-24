@@ -18,10 +18,11 @@
 //= require bootstrap
 //= require bootstrap-sprockets
 //= require_tree .
+//= require jquery-ui
 
-Template.navBarTemplate.events({
-    'click .dropdown-toggle': function (e) {
-        e.preventDefault();
-        $(e.target).find('.dropdown-menu').toggle();
-        }
-});
+// Template.navBarTemplate.events({
+//     'click .dropdown-toggle': function (e) {
+//         e.preventDefault();
+//         $(e.target).find('.dropdown-menu').toggle();
+//         }
+// });
