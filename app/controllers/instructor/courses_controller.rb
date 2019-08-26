@@ -1,4 +1,5 @@
 class Instructor::CoursesController < ApplicationController
+   skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
   before_action :require_authorized_for_current_course, only: [:show]
 
@@ -22,6 +23,9 @@ class Instructor::CoursesController < ApplicationController
   def index
     @course = current_user.courses
   end
+
+
+
   
   private
 
@@ -30,11 +34,18 @@ class Instructor::CoursesController < ApplicationController
       render plain: "Unauthorized", status: :unauthorized
     end
   end
+helper_method :current_course
 
-  helper_method :current_course
-  def current_course
-    @current_course ||= Course.find(params[:id])
+def current_section
+  @current_section = Section.find(params[:id])
+end
+def current_course
+  if params[:course_id]
+    @current_course ||= Course.find(params[:course_id])
+  else
+    current_section.course
   end
+end
 
   def course_params
     params.require(:course).permit(:title, :description, :cost, :image)

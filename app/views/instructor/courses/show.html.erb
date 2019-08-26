@@ -18,14 +18,16 @@
   </div>
   <div class="booyah-box col-10 offset-1">
     <ul class="sections">
-      <% current_course.sections.each do |section|%> 
-      <li class="text-center">
+      <% current_course.sections.rank(:row_order).each do |section|%> 
+      <li data-update-section="<%= instructor_section_path(section) %>" class= "section-li">
+        <span class="fa fa-ellipses-v"></span>
         <%= section.title %>
         <%= link_to 'New Lesson', new_instructor_section_lesson_path(section), class: 'float-right btn btn-primary' %>
         <ul class="lessons">
           <br />
           <% section.lessons.rank(:row_order).each do |lesson| %>
           <li data-update-url=<%= instructor_lesson_path(lesson) %>>
+            <span class="fa fa-ellipses-v"></span>
             <%= link_to lesson.title, lesson_path(lesson) %></b>
             -
             <%= lesson.subtitle %>
@@ -48,6 +50,21 @@
             url: ui.item.data('update-url'),
             dataType: 'json',
             data: { lesson: { row_order_position: ui.item.index() } }
+          })
+        }
+      });    
+    }); 
+
+        $(function () {
+      $('.sections').sortable({
+        update: function( event, ui ) {
+          console.log(ui.item.index())
+          console.log(ui.item.data('update-section'))
+          $.ajax({
+            type: 'PUT',
+            url: ui.item.data('update-section'),
+            dataType: 'json',
+            data: { section: { row_order_position: ui.item.index() } }
           })
         }
       });    

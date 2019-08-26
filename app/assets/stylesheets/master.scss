@@ -4,11 +4,17 @@
 h1, h2, h3, h4, h5, h6, .navbar {
   margin: 0;
 }
+ul {
+  list-style-type: none;
+}
 body {
   background-image: image_url('bg.png');
   padding-top: 53px;
 }
-
+.section-li {
+  border: 1px solid;
+  border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
+}
 .booyah-box {
   -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
   -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
