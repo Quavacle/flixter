@@ -18,6 +18,7 @@ class Instructor::CoursesController < ApplicationController
 
   def show
     @course = current_user.courses
+    @section = Section.new
   end
  
   def index

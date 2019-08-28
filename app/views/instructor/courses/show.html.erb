@@ -9,7 +9,10 @@
     <%= link_to 'Preview course', course_path(current_course), class: 'btn btn-warning float-right' %>
     <br class="clr" />
     <div class="text-center">
-      <%= link_to 'Add a section...', new_instructor_course_section_path(current_course), class: 'btn btn-primary btn-large' %>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newSectionModal">
+  Add a section...
+</button>
+
     </div>
     <br class="clr" />
   </div>
@@ -52,6 +55,30 @@
     </ul>
   </div>
 
+
+<!-- Section Modal -->
+<div class="modal fade" id="newSectionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="newSectionModalLabal">Create a section</h4>
+      </div>
+   
+        <%= simple_form_for @section, url: instructor_course_sections_path(current_course) do |f| %>
+           <div class="modal-body">
+        <%= f.input :title %>
+      </div>
+      <div class="modal-footer">
+         <%= f.submit "Add a section", class: 'btn btn-primary' %>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+            <% end %>
+    </div>
+  </div>
+</div>
 
   <script>
     $(function () {

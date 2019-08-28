@@ -1,6 +1,7 @@
 <br />
-<h1>Courses landing index for instructor </h1>
 <div class="booyah-box col-10 offset-1">
+<h1>Courses I'm teaching</h1>
+
   <% @course.each do |course| %>
   <div class="row">
   <div class="col-sm-2 col-3">
@@ -16,5 +17,28 @@
     </div>
   <br />
 </div>
+  <% end %>
+</div>
+<br />
+  <hr class="col-8 offset-2">
+    <br class="clr" />
+<div class="booyah-box col-10 offset-1">
+<h1>What I'm Learning</h1>
+<% current_user.enrolled_courses.each do |course| %>
+  <h3 class="text-center">
+
+    <%= link_to course.title, course_path(course) %>
+    </h3>
+        <br />
+     <%= image_tag course.image.url, class: "coursephoto" %>
+         <br />
+    <div class="row">
+      <div class="col-12 col-sm-8">
+        <%= course.description %>
+      </div>
+      <div class="col-12 col-sm-4 text-center">
+        <%= link_to "More Info...", course_path(course), class: 'btn btn-lg btn-primary' %>
+      </div>
+    </div>
   <% end %>
 </div>
