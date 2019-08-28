@@ -1,9 +1,6 @@
 
 <br />
 <div class="booyah-box col-10 offset-1">
-  <% @course.each do |course| %>
-  <%= link_to course.title, course_path(course) %>
-  <% end %>
   <h1 class="text-center"><%= current_course.title %></h1>
   <% if current_course.image.url %>
     <%= image_tag current_course.image.url %>
@@ -19,18 +16,33 @@
   <div class="booyah-box col-10 offset-1">
     <ul class="sections">
       <% current_course.sections.rank(:row_order).each do |section|%> 
-      <li data-update-section="<%= instructor_section_path(section) %>" class= "section-li">
-        <span class="fa fa-ellipses-v"></span>
+      <li data-update-section="<%= instructor_section_path(section) %>" class="section-li">
+        <div class="header">
+        <i class="fas fa-ellipsis-v"></i>
         <%= section.title %>
+      </div>
         <%= link_to 'New Lesson', new_instructor_section_lesson_path(section), class: 'float-right btn btn-primary' %>
+        <br class="clr" />
+        <br class="clr" />
         <ul class="lessons">
           <br />
           <% section.lessons.rank(:row_order).each do |lesson| %>
           <li data-update-url=<%= instructor_lesson_path(lesson) %>>
-            <span class="fa fa-ellipses-v"></span>
-            <%= link_to lesson.title, lesson_path(lesson) %></b>
-            -
+            <div class="row">
+              <div class="col-1">
+                <br />
+                <i class="fas fa-ellipsis-v"></i>
+              </div>
+              <div class="col-11 text-center">
+            <p>
+              <b><%= link_to lesson.title, lesson_path(lesson) %></b>
+            </p>
+            <p>
             <%= lesson.subtitle %>
+          </p>
+        </div>
+      </div>
+      <br class="clr" />
           </li>
           <% end %>
         </ul>
