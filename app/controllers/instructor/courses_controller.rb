@@ -17,7 +17,6 @@ class Instructor::CoursesController < ApplicationController
   end
 
   def show
-    @course = current_user.courses
     @section = Section.new
     @lesson = Lesson.new
   end
@@ -43,8 +42,8 @@ def current_section
 end
 
 def current_course
-  if params[:course_id]
-    @current_course ||= Course.find(params[:course_id])
+    if params[:id]
+    @current_course ||= Course.find(params[:id])
   else
     current_section.course
   end

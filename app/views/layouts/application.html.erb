@@ -8,8 +8,6 @@
 
   <!-- Bootstrap CSS -->
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
-
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -29,31 +27,16 @@
       <li class="nav-item">
         <%= link_to 'All Courses', courses_path, class: 'nav-link' %>
       </li> 
-      <li class="nav-item dropdown navbar-right">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          By Instrument
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" link_to="#">Piano</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown navbar-right">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          By Area of Study
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" link_to="#">Rhythm</a>
-        </div>
-      </li>
     </ul>
+  </div>
     <ul class="nav navbar-nav navbar-right">
       <li class="nav-item dropdown navbar-right">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-music"></i>
           <%if user_signed_in? %>
-          <name class = "navbar-brand"><%= current_user.name %></name>
+          <%= current_user.name %>
           <% else %>
-          Login or sign up!
+          Login/Sign up
           <% end %>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -87,7 +70,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
+<div class="modal-body">
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= f.error_notification %>
 
@@ -110,14 +93,14 @@
       </div>
 
       <div class="form-actions">
-        <%= f.button :submit, "Sign up" %>
+        <%= f.button :submit, "Sign up", class: 'btn btn-primary' %>
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
       <% end %>
 
 
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+     
     </div>
   </div>
 </div>
@@ -132,6 +115,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <div class="modal-body">
       <h2>Edit <%= resource_name.to_s.humanize %></h2>
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= f.error_notification %>
@@ -168,6 +152,7 @@
       <%= link_to "Back", :back %>
     </div>
   </div>
+  </div>
 </div>
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -179,6 +164,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <div class="modal-body">
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-inputs">
         <%= f.input :email,
@@ -198,6 +184,7 @@
     </div>
   </div>
 </div>
+</div>
 <div class="text-center">
   <% if notice %>
   <p class="alert alert-success"><%= notice %></p>
@@ -205,11 +192,8 @@
   <% if alert %>
   <p class="alert alert-danger"><%= alert %></p>
   <% end %>
-
 </div>
-  <%= yield %>
-
-</div>
+<%= yield %>
 
 <br />
 <!-- Footer -->
@@ -217,8 +201,8 @@
   <div class="row text-center align-self-center">
     <div class="col-12 col-sm-4 align-self-center">
       <% if current_user.nil? %>
-      <%= link_to "Sign up", new_user_registration_path %> or <br />
-      <%= link_to "Log-in", new_user_session_path %> 
+      <a href="#" data-toggle="modal" data-target="#loginModal">Login</a> or 
+      <a href="#" data-toggle="modal" data-target="#signupModal">Sign-up</a><br/>
       to teach a course
       or edit existing courses
       <% else %>
@@ -257,9 +241,12 @@
 <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 <!-- Bootstrap scripts -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
+
+
+
 
 </body>
 </html>
