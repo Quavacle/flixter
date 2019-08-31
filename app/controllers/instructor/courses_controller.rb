@@ -19,6 +19,7 @@ class Instructor::CoursesController < ApplicationController
   def show
     @course = current_user.courses
     @section = Section.new
+    @lesson = Lesson.new
   end
  
   def index
@@ -40,6 +41,7 @@ helper_method :current_course
 def current_section
   @current_section = Section.find(params[:id])
 end
+
 def current_course
   if params[:course_id]
     @current_course ||= Course.find(params[:course_id])

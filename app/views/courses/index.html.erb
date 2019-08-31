@@ -1,36 +1,55 @@
 <br />
-
-  <h1 class="text-center"> Courses Available </h1>
-  <br />
-  <br />
-  <% @courses.each do |course| %>
-  <div class="booyah-box col-10 offset-1">
+<h1 class="text-center"> Courses Available </h1>
+<br />
+<br />
+<% @courses.each do |course| %>
+<div class="booyah-box col-10 offset-1">
   <div class="row">
     <div class="text-center col-sm-12"> <h3><%= link_to course.title, course_path(course) %></h3></div>
-    <div class="inset col-6">
-    Cost: <p class="badge badge-success"><%= number_to_currency course.cost %></p>
-      
-      Instructor <%= course.user.email %>
-       <div class="col-sm-col-12 text-center">
-        <%= link_to 'Learn More', course_path(course), class: 'btn btn-primary btn-med' %>
-      </div>
-    </div>   
-
-    <% if course.image.url %>
-      <%= image_tag course.image.url, class: 'coursephoto float-right' %>
-    </div>  
-    </div>
-    <%= course.description %>
   </div>
-    <% end %>
-
-    <br >
-    <div class="row">
-      <div class="col-sm-8 col-12">
-        
-      </div>
-      
+  <div class="row align-items-center">   
+    <div class="col inset align-self-center">
+      <% if course.image.url %>
+      <%= image_tag course.image.url, class: 'coursephoto text-center' %>
+      <br />
+      Cost: <p class="badge badge-success"><%= number_to_currency course.cost %></p>
+      <br />
+      <br />
+      <%= course.sections.count %> sections in this course
+      <br />
+      <br />
+      Instructed by <%= course.user.name %> 
+      <br />
+      <br />
+       <%= link_to 'Click To Learn More . . .', course_path(course), class: 'btn btn-primary btn-block text-center' %>
     </div>
-    <br class="clr">
+    <div class="col-6 align-self-start">
+     <p>  <%= course.description %></p>
+
+   </div>
+   <div class="col">
+   <h3 class="text-center"> Some things you'll learn </h3>
+   <ul>
+    <% if course.sections != nil %>
+    <% course.sections[0..3].each do |section| %>
+    <li class="section-li text-center"><%= section.title %></li>
     <% end %>
+    <% end %>
+  </ul>
+</div>
+</div>
+<br class="clear" />
+
+</div>
+<% end %>
+
+<br >
+<div class="row">
+  <div class="col-sm-8 col-12">
+
   </div>
+
+</div>
+<br class="clr">
+<% end %>
+</div>

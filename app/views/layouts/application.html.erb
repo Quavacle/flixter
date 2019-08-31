@@ -15,14 +15,8 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <!-- <script src="https://kit.fontawesome.com/6f980847d3.js"></script> -->
-   <link href="https://vjs.zencdn.net/7.6.0/video-js.css" rel="stylesheet">
-
-
-  <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
- 
+  <link href="https://vjs.zencdn.net/7.6.0/video-js.css" rel="stylesheet">
 </head>
-
-
 <!-- Navbar -->
 <div id="flex-content-container">
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -34,7 +28,7 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <%= link_to 'All Courses', courses_path, class: 'nav-link' %>
-        </li> 
+      </li> 
       <li class="nav-item dropdown navbar-right">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           By Instrument
@@ -54,88 +48,176 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="nav-item dropdown navbar-right">
-
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-music"></i>
           <%if user_signed_in? %>
-            <%= current_user.email %>
-            <% else %>
-            Login or sign up!
-            <% end %>
+          <name class = "navbar-brand"><%= current_user.name %></name>
+          <% else %>
+          Login or sign up!
+          <% end %>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <% if user_signed_in? %>
           <strong><%= current_user.email %></strong>
-          <%= link_to 'Edit profile', edit_user_registration_path, :class => 'dropdown-item fas fa-user-cog' %>
-          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'dropdown-item fas fa-sign-out-alt'  %>
+          <button type="button" class="dropdown-item btn btn-primary btn-block" data-toggle="modal" data-target="#editModal">
+            Edit Info
+          </button><br />
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'dropdown-item btn btn-secondary btn-block'  %>
           <% else %>
-          <%= link_to "Sign up", new_user_registration_path, :class => 'dropdown-item fas fa-user-plus'  %>
-          <%= link_to "Login", new_user_session_path, :class => 'dropdown-item fas fa-sign-in-alt'  %>
+          <button type="button" class="dropdown-item btn btn-primary btn-block" data-toggle="modal" data-target="#signupModal">
+            Sign Up
+          </button><br />
+          <button type="button" class="dropdown-item btn btn-primary btn-block" data-toggle="modal" data-target="#loginModal">
+            Log In
+          </button>     
           <% end %>
-        <!-- <a class="dropdown-item" href="#"><i class="fas fa-user-plus"></i></span>  New User</a>
-          <a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt"></i></span>  Login</a> -->
         </div>
       </li>
-
-
     </ul>
   </div>
 </nav>
-<!-- Login Modal -->
-<!-- <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
+
+<!-- Register Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <i class="fas fa-user prefix grey-text"></i>
-          <input type="text" id="orangeForm-name" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="orangeForm-name">Your name</label>
-        </div>
-        <div class="md-form mb-5">
-          <i class="fas fa-envelope prefix grey-text"></i>
-          <input type="email" id="orangeForm-email" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="orangeForm-email">Your email</label>
-        </div>
 
-        <div class="md-form mb-4">
-          <i class="fas fa-lock prefix grey-text"></i>
-          <input type="password" id="orangeForm-pass" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="orangeForm-pass">Your password</label>
-        </div>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
 
+      <div class="form-inputs">
+        <%= f.input :name,
+        required: true,
+        autofocus: true,
+        input_html: { autocomplete: "name"}%>
+        <%= f.input :email,
+        required: true,
+        autofocus: true,
+        input_html: { autocomplete: "email" }%>
+        <%= f.input :password,
+        required: true,
+        hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+        input_html: { autocomplete: "new-password" } %>
+        <%= f.input :password_confirmation,
+        required: true,
+        input_html: { autocomplete: "new-password" } %>
       </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button class="btn btn-deep-orange">Sign up</button>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Sign up" %>
       </div>
+      <% end %>
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
   </div>
 </div>
 
-<div class="text-center">
-  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm">Launch
-    Modal Register Form</a>
-  </div> -->
+<!-- User edit modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <h2>Edit <%= resource_name.to_s.humanize %></h2>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.error_notification %>
 
+      <div class="form-inputs">
+        <%= f.input :email, required: true, autofocus: true %>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+        <% end %>
+
+        <%= f.input :password,
+        hint: "leave it blank if you don't want to change it",
+        required: false,
+        input_html: { autocomplete: "new-password" } %>
+        <%= f.input :password_confirmation,
+        required: false,
+        input_html: { autocomplete: "new-password" } %>
+        <%= f.input :current_password,
+        hint: "we need your current password to confirm your changes",
+        required: true,
+        input_html: { autocomplete: "current-password" } %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Update" %>
+      </div>
+      <% end %>
+
+      <h3>Cancel my account</h3>
+
+      <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+      <%= link_to "Back", :back %>
+    </div>
+  </div>
+</div>
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Log-in</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-inputs">
+        <%= f.input :email,
+        required: false,
+        autofocus: true,
+        input_html: { autocomplete: "email" } %>
+        <%= f.input :password,
+        required: false,
+        input_html: { autocomplete: "current-password" } %>
+        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Log in" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="text-center">
   <% if notice %>
   <p class="alert alert-success"><%= notice %></p>
   <% end %>
   <% if alert %>
   <p class="alert alert-danger"><%= alert %></p>
   <% end %>
-  <%= yield %>
+
 </div>
+  <%= yield %>
+
+</div>
+
+<br />
+<!-- Footer -->
 <div class="footer" id="footer">
-  <div class="row">
-    <div class="container col-6">
+  <div class="row text-center align-self-center">
+    <div class="col-12 col-sm-4 align-self-center">
       <% if current_user.nil? %>
-      <%= link_to "Sign up", new_user_registration_path %> or
+      <%= link_to "Sign up", new_user_registration_path %> or <br />
       <%= link_to "Log-in", new_user_session_path %> 
       to teach a course
       or edit existing courses
@@ -144,19 +226,40 @@
       <%= link_to 'Your Courses', instructor_courses_path %>
       <% end %>
     </div>
-    <div class="container col-6 pull-right">
-      <%= link_to 'Linko', '#' %>
+    <div class="col-12 col-sm-4 align-self-center text-center">
+      <br />
+      <%= link_to 'Contact', '#' %> 
+      <br />
+      <%= link_to 'Our Team', '#'%>
+      <br />
+      <%= link_to 'Privacy Policy', privacy_path %>
+    </div>
+    <div class="col-12 col-sm-4 align-self-center social">
+      <b>Social</b>
+      <br />
+      <%= link_to 'http://github.com/Quavacle' do %>
+      <span class="social-button fab fa-github-square fa-2x"></span>
+      <% end %>
+      <%= link_to 'http://facebook.com/quavacle' do %>
+      <span class="social-button fab fa-facebook-square fa-2x"></span>
+      <% end %>
+      <%= link_to 'http://twitter.com/bvm' do %>
+      <span class="social-button fab fa-twitter-square fa-2x"></span>
+      <% end %>
     </div>
   </div>
 </div>
+
+
+
 <!-- Videojs script -->
-  <script src='https://vjs.zencdn.net/7.6.0/video.js'></script>
-   <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+<script src='https://vjs.zencdn.net/7.6.0/video.js'></script>
+<script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 <!-- Bootstrap scripts -->
-  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
 
 </body>
 </html>

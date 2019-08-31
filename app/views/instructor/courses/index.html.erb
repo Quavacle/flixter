@@ -9,10 +9,9 @@
     Enrolled: <%= course.enrollments.count %> <br />
     <span class="badge badge-success"><%= number_to_currency course.cost %></span>
   </div>
-  <%= image_tag course.image.url, class: "coursephoto" %>
+  <%= image_tag course.image.url, class: "coursephoto img-fluid" %>
   <div class="col-sm-4 col-5">
     <%= link_to 'Administer', instructor_course_path(course), class: "btn btn-danger btn-large" %> <br />
-    <%= link_to 'Edit course', '#', class: "btn btn-primary btn-large" %> <br />
     <%= link_to 'Contact students', '#', class: "btn btn-success btn-large" %>
     </div>
   <br />

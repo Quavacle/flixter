@@ -4,6 +4,10 @@
 h1, h2, h3, h4, h5, h6, .navbar {
   margin: 0;
 }
+
+.anchor {
+  padding-top: 300px;
+}
 ul {
   list-style-type: none;
 }
@@ -14,6 +18,14 @@ ul .header {
 
 ul .header .fa {
   font-size: 20px;
+}
+
+.social-button {
+  margin: 4px;
+}
+
+.social a:hover {
+  text-decoration: none;
 }
 
 body {
@@ -62,6 +74,7 @@ body {
   box-shadow: 0px 1px 3px #2a2a2a;
   background-image: image_url('dark-honeycomb.png');
 }
+
 
 .navbar-dark .navbar-brand {
   font-family: 'Fira Code', monospace;
@@ -116,6 +129,7 @@ body {
 
 #flex-content-container {
   flex: 1;
+  margin-bottom: 5px;
 }
 
 #footer {
@@ -162,8 +176,8 @@ body {
 .coursephoto {
   border-radius: 8px;
   object-fit: 'contain';
-  max-width: 300px;
-  max-height: 225px;
+  max-width: 250px;
+  max-height: 300px;
 }
 
 .sectionhead {
@@ -183,4 +197,9 @@ body {
   border: 1px solid #ccc;
   border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
   padding: 10px;
+  margin-left: 10px;
+}
+
+.description {
+  text-align: right;
 }

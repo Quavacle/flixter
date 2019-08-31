@@ -1,59 +1,93 @@
-
 <br />
 <div class="booyah-box col-10 offset-1">
-  <h1 class="text-center"><%= current_course.title %></h1>
-  <% if current_course.image.url %>
-    <%= image_tag current_course.image.url %>
-    <% end %>
-    <br />
-    <%= link_to 'Preview course', course_path(current_course), class: 'btn btn-warning float-right' %>
-    <br class="clr" />
-    <div class="text-center">
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newSectionModal">
-  Add a section...
-</button>
+  <div class="row">
+    <div class="text-center col-sm-12"> <h3><%= link_to current_course.title, course_path(current_course) %></h3></div>
 
-    </div>
-    <br class="clr" />
   </div>
-  <div class="booyah-box col-10 offset-1">
-    <ul class="sections">
-      <% current_course.sections.rank(:row_order).each do |section|%> 
-      <li data-update-section="<%= instructor_section_path(section) %>" class="section-li">
-        <div class="header">
-        <i class="fas fa-ellipsis-v"></i>
-        <%= section.title %>
-      </div>
-        <%= link_to 'New Lesson', new_instructor_section_lesson_path(section), class: 'float-right btn btn-primary' %>
-        <br class="clr" />
-        <br class="clr" />
-        <ul class="lessons">
-          <br />
-          <% section.lessons.rank(:row_order).each do |lesson| %>
-          <li data-update-url=<%= instructor_lesson_path(lesson) %>>
-            <div class="row">
-              <div class="col-1">
-                <br />
-                <i class="fas fa-ellipsis-v"></i>
-              </div>
-              <div class="col-11 text-center">
-            <p>
-              <b><%= link_to lesson.title, lesson_path(lesson) %></b>
-            </p>
-            <p>
-            <%= lesson.subtitle %>
-          </p>
-        </div>
-      </div>
-      <br class="clr" />
-          </li>
-          <% end %>
-        </ul>
-      </li>
+  <div class="row align-items-center">   
+    <div class="col-3 inset align-self-center">
+      <% if current_course.image.url %>
+      <%= image_tag current_course.image.url, class: 'coursephoto text-center' %>
       <br />
+      Cost: <p class="badge badge-success"><%= number_to_currency current_course.cost %></p>
+      <br />
+      <%= current_course.sections.count %> sections in this course
+      <br />
+      <br />
+      <%= link_to 'Preview course', course_path(current_course), class: 'btn btn-warning btn-block float-right' %>
+    </div>
+    <div class="col-6 align-self-start">
+     <p>  <%= current_course.description %></p>
+
+   </div>
+   <div class="col">
+     <h3 class="text-center"> Section Preview </h3>
+     <ul>
+       <% current_course.sections.each do |section| %>
+      <li class="section-li text-center">
+
+        <a href="#<%= section.id %>", style="display: block; text-align: center;"><%= section.title %></a>
+      </li>
       <% end %>
+
     </ul>
   </div>
+</div>
+<% end %>
+<br />
+</div>
+<br class="clr" />
+<div class="booyah-box col-10 offset-1">
+  <div class="text-center">
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newSectionModal">
+      Add a section...
+    </button>
+
+  </div>
+  <br class="clr" />
+
+
+  <ul class="sections">
+    <% current_course.sections.rank(:row_order).each do |section|%>
+    <a name="<%= section.id %>" class="anchor"> </a>
+    <li data-update-section="<%= instructor_section_path(section) %>" class="section-li">
+      <div class="header">
+        <i class="fas fa-ellipsis-v"></i>
+        <%= section.title %>  
+      </div>
+      <button type="button" class="align-self-center btn btn-primary btn-lg float-right new-lesson-button" data-toggle="modal" data-target="#newLessonModal" data-lesson-url = "<%= instructor_section_lessons_path(section) %>" >Add a lesson... </button>
+      <br class="clr" />
+      <br class="clr" />
+      
+      
+      <ul class="lessons">
+        <br />
+        <% section.lessons.rank(:row_order).each do |lesson| %>
+        <li data-update-url=<%= instructor_lesson_path(lesson) %>>
+          <div class="row">
+            <div class="col-1">
+              <br />
+              <i class="fas fa-ellipsis-v"></i>
+
+            </div>
+            <div class="col-11 text-center">
+              <p>
+                <b><%= link_to lesson.title, lesson_path(lesson) %></b>
+              </p>
+              <p>
+                <%= lesson.subtitle %>
+              </p>
+            </div>
+          </div>
+          <br class="clr" />
+        </li>
+        <% end %>
+      </ul>
+    </li>
+    <br />
+    <% end %>
+  </ul>
+</div>
 
 
 <!-- Section Modal -->
@@ -66,46 +100,79 @@
         </button>
         <h4 class="modal-title" id="newSectionModalLabal">Create a section</h4>
       </div>
-   
-        <%= simple_form_for @section, url: instructor_course_sections_path(current_course) do |f| %>
-           <div class="modal-body">
+
+      <%= simple_form_for @section, url: instructor_course_sections_path(current_course) do |f| %>
+      <div class="modal-body">
         <%= f.input :title %>
       </div>
       <div class="modal-footer">
-         <%= f.submit "Add a section", class: 'btn btn-primary' %>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-      </div>
-            <% end %>
-    </div>
-  </div>
+       <%= f.submit "Add a section", class: 'btn btn-primary' %>
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+     </div>
+     <% end %>
+   </div>
+ </div>
 </div>
 
-  <script>
-    $(function () {
-      $('.lessons').sortable({
-        update: function( event, ui ) {
-          $.ajax({
-            type: 'PUT',
-            url: ui.item.data('update-url'),
-            dataType: 'json',
-            data: { lesson: { row_order_position: ui.item.index() } }
-          })
-        }
-      });    
-    }); 
+<!-- Lesson Modal -->
+<div class="modal fade" id="newLessonModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="newLessonModalLabal">Create a lesson</h4>
+      </div>
 
-        $(function () {
-      $('.sections').sortable({
-        update: function( event, ui ) {
-          console.log(ui.item.index())
-          console.log(ui.item.data('update-section'))
-          $.ajax({
-            type: 'PUT',
-            url: ui.item.data('update-section'),
-            dataType: 'json',
-            data: { section: { row_order_position: ui.item.index() } }
-          })
-        }
-      });    
-    }); 
-  </script>
+      <%= simple_form_for @lesson, url: '#', html: {id: 'newLessonForm'} do |f| %>
+      <div class="modal-body">
+        <%= f.input :title %>
+        <%= f.input :subtitle %>
+        <%= f.input :video %>
+      </div>
+      <div class="modal-footer">
+       <%= f.submit "Add lesson", class: 'btn btn-primary' %>
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+     </div>
+     <% end %>
+   </div>
+ </div>
+</div>
+
+<script>
+
+  $('.new-lesson-button').click(function( event ) {
+    var lessonUrl = $( event.target).data('lesson-url');
+    alert(lessonUrl);
+    $('#newLessonForm').attr('action', lessonUrl);
+  });
+
+  $(function () {
+    $('.lessons').sortable({
+      update: function( event, ui ) {
+        $.ajax({
+          type: 'PUT',
+          url: ui.item.data('update-url'),
+          dataType: 'json',
+          data: { lesson: { row_order_position: ui.item.index() } }
+        })
+      }
+    });    
+  }); 
+
+  $(function () {
+    $('.sections').sortable({
+      update: function( event, ui ) {
+        console.log(ui.item.index())
+        console.log(ui.item.data('update-section'))
+        $.ajax({
+          type: 'PUT',
+          url: ui.item.data('update-section'),
+          dataType: 'json',
+          data: { section: { row_order_position: ui.item.index() } }
+        })
+      }
+    });    
+  }); 
+</script>
