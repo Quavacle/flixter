@@ -10,6 +10,7 @@ Flixter is a teacher/student learning platform based around video lessons made a
 - Video upload and playback
 - Payment options with Stripe
 - Lesson ordering options for teachers
+- Student and teacher dashboards
 
 On Heroku:
 [Flixter](https://flixter-bvm.herokuapp.com/)
