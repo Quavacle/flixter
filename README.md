@@ -1,4 +1,4 @@
-# Flixter
+# [Flixter](https://flixter-bvm.herokuapp.com/)
 
 ### Udemy Clone built in Rails, with Jquery, AWS integration, and Stripe
 
@@ -10,3 +10,6 @@ Flixter is a teacher/student learning platform based around video lessons made a
 - Video upload and playback
 - Payment options with Stripe
 - Lesson ordering options for teachers
+
+On Heroku:
+[Flixter](https://flixter-bvm.herokuapp.com/)
