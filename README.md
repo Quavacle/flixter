@@ -1,24 +1,12 @@
-# README
+# Flixter
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Udemy Clone built in Rails, with Jquery, AWS integration, and Stripe
 
-Things you may want to cover:
+Flixter is a teacher/student learning platform based around video lessons made available to students either free of charge or by card payment.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Features
+- User authentication
+- AWS uploading
+- Video upload and playback
+- Payment options with Stripe
+- Lesson ordering options for teachers
